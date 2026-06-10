@@ -20,12 +20,16 @@ import util.*;
 public class InventarioDAO implements Interface.IInventarioDAO{
     
     @Override
-    public int obtenerStockActual(Connection con, int idProducto) throws SQLException {
-        String sql = "SELECT stock_actual FROM inventario WHERE id_producto=?";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
+    public int obtenerStockActual(int idProducto){
+        String sql = "SELECT stock_actual FROM inventario WHERE id_producto = ?";
+        try (Connection con = ConnectionMySQL.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idProducto);
             ResultSet rs = ps.executeQuery();
             return rs.next() ? rs.getInt("stock_actual") : 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 

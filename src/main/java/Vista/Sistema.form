@@ -133,7 +133,7 @@
                   <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="440" max="-2" attributes="0"/>
               </Group>
-              <Component id="jTabbedPane1" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" alignment="1" min="-2" pref="850" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -142,7 +142,7 @@
                   <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTabbedPane1" min="-2" pref="600" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -235,7 +235,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="369" max="32767" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -302,7 +302,7 @@
                                   <Component id="btn_desFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="219" max="32767" attributes="0"/>
+                          <EmptySpace pref="78" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -646,7 +646,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="345" max="32767" attributes="0"/>
+                          <EmptySpace pref="26" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -684,7 +684,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="222" max="32767" attributes="0"/>
+                          <EmptySpace pref="81" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -929,7 +929,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="349" max="32767" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -963,7 +963,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="222" max="32767" attributes="0"/>
+                          <EmptySpace pref="81" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1189,7 +1189,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="349" max="32767" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1225,7 +1225,7 @@
                                   <Component id="btn_procesarMovimiento" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="224" max="32767" attributes="0"/>
+                          <EmptySpace pref="83" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

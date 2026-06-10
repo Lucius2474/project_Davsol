@@ -370,7 +370,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         RegistroVentaLayout.setVerticalGroup(
             RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,7 +419,7 @@ public class Sistema extends javax.swing.JFrame {
                                 .addComponent(txt_total)
                                 .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(btn_desFactura)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registro Venta", RegistroVenta);
@@ -522,7 +522,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         ClienteLayout.setVerticalGroup(
             ClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -551,7 +551,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(btn_agregar)
                             .addComponent(btn_actualizar)
                             .addComponent(btn_eliminar))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cliente", Cliente);
@@ -651,7 +651,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_precioProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         ProductosLayout.setVerticalGroup(
             ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,7 +677,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(btn_registrarProduct)
                             .addComponent(btn_actualizarProduct)
                             .addComponent(btn_eliminarProduct))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Productos", Productos);
@@ -764,7 +764,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_cantidadInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         InventarioLayout.setVerticalGroup(
             InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -792,7 +792,7 @@ public class Sistema extends javax.swing.JFrame {
                             .addComponent(txtF_cantidadInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btn_procesarMovimiento)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inventario", Inventario);
@@ -804,7 +804,7 @@ public class Sistema extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -812,7 +812,7 @@ public class Sistema extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

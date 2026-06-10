@@ -4,7 +4,7 @@
  */
 package Controlador;
 
-import DAO.ProductoDAO;
+import DAO.*;
 import Interface.*;
 import Modelo.*;
 import Services.VentaService;
@@ -24,10 +24,13 @@ public class VentaController {
     private ProductoController productoController;
     private IClienteDAO clienteDAO;
     private VentaService ventaService;
+    private IInventarioDAO inventarioDAO; 
     private List<DetalleVenta> detallesTemp;
     private Cliente clienteActual;
     private double totalPagar;
+    
 
+    
     public VentaController(Sistema vista, ProductoController productoController,
                            IClienteDAO clienteDAO, IVentaDAO ventaDAO,
                            IDetalleVentaDAO detalleDAO, IInventarioDAO inventarioDAO,
@@ -36,6 +39,7 @@ public class VentaController {
         this.productoController = productoController;
         this.clienteDAO = clienteDAO;
         this.ventaService = new VentaService(ventaDAO, detalleDAO, inventarioDAO, movimientoDAO);
+        this.inventarioDAO = inventarioDAO;
         this.detallesTemp = new ArrayList<>();
     }
 
@@ -61,34 +65,60 @@ public class VentaController {
         // Obtener stock desde inventario
         // (deberías tener un método en InventarioController o acceder a inventarioDAO)
         // Simplificamos: asumimos que tienes inventarioDAO
-        // int stock = inventarioDAO.obtenerStockActual(con, p.getIdproducto());
-        // vista.txtF_stockDis.setText(String.valueOf(stock));
+        int stock = inventarioDAO.obtenerStockActual(p.getIdproducto());
+        vista.txtF_stockDis.setText(String.valueOf(stock));
         vista.txtF_cantidad.setText("");
         vista.btn_agregarVenta.setEnabled(true);
     }
 
     public void agregarProducto() {
         if (vista.txtF_cantidad.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese cantidad");
+            JOptionPane.showMessageDialog(vista, "Ingrese cantidad");
             return;
         }
-        int cantidad = Integer.parseInt(vista.txtF_cantidad.getText());
-        Producto prod = getProductoSeleccionado();
-        double precio = Double.parseDouble(vista.txtF_precio.getText());
-        double subtotal = cantidad * precio;
-        // Verificar stock (necesitas acceso a inventarioDAO)
-        // Por simplicidad, asumimos que hay stock suficiente
+        int cantidad;
+        try {
+            cantidad = Integer.parseInt(vista.txtF_cantidad.getText());
+            if (cantidad <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(vista, "Cantidad inválida");
+            return;
+        }
 
-        // Evitar duplicados en la tabla
+        Producto prod = getProductoSeleccionado();
+        if (prod == null) {
+            JOptionPane.showMessageDialog(vista, "Seleccione un producto");
+            return;
+        }
+
+        double precio;
+        try {
+            precio = Double.parseDouble(vista.txtF_precio.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(vista, "Precio inválido");
+            return;
+        }
+
+        int stockActual = inventarioDAO.obtenerStockActual(prod.getIdproducto());
+        if (cantidad > stockActual) {
+            JOptionPane.showMessageDialog(vista, 
+                "Stock insuficiente. Disponible: " + stockActual,
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double subtotal = cantidad * precio;
+
         DefaultTableModel model = (DefaultTableModel) vista.t_regVent.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
             Producto pTabla = (Producto) model.getValueAt(i, 1);
             if (pTabla.getIdproducto() == prod.getIdproducto()) {
-                JOptionPane.showMessageDialog(null, "Producto ya agregado");
+                JOptionPane.showMessageDialog(vista, "El producto ya está en la lista");
                 return;
             }
         }
-
+        
+        vista.btn_deleteVenta.setEnabled(true);
         model.addRow(new Object[]{cantidad, prod, precio, subtotal});
         detallesTemp.add(new DetalleVenta(cantidad, 0, 0, prod.getIdproducto(), precio, subtotal));
         recalcularTotal();

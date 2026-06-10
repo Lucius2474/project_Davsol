@@ -10,11 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IInventarioDAO {
-    int obtenerStockActual(Connection con, int idProducto) throws SQLException;
+    int obtenerStockActual(int idProducto);
     void actualizarStock(Connection con, int idInventario, int nuevoStock) throws SQLException;
     Inventario obtenerPorProducto(int idProducto);
     Inventario obtenerPorProductoConConexion(Connection con, int idProducto) throws SQLException;
     List<Inventario> listar();
     int obtenerIdInventario(Connection con, int idProducto) throws SQLException;
     void actualizarStockRV(Connection con, int idProducto, int nuevaCantidad) throws SQLException;
+
 }
