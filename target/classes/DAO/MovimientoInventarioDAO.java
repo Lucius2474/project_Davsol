@@ -11,20 +11,16 @@ import java.sql.*;
  *
  * @author aalex
  */
-public class MovimientoInventarioDAO {
+public class MovimientoInventarioDAO implements Interface.IMovimientoInventarioDAO{
     
-public void insertarConConexion(Connection con, int idInventario, String tipo, int cantidad) throws SQLException {
-
-        String sql = """
-            INSERT INTO movimiento_inventario(id_inventario, tipo_movimiento, cantidad)
-            VALUES (?, ?, ?)
-        """;
-
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, idInventario);
-        ps.setString(2, tipo);
-        ps.setInt(3, cantidad);
-
-        ps.executeUpdate();
+    @Override
+    public void insertar(Connection con, int idInventario, String tipo, int cantidad) throws SQLException {
+        String sql = "INSERT INTO movimiento_inventario(id_inventario, tipo_movimiento, cantidad) VALUES (?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idInventario);
+            ps.setString(2, tipo);
+            ps.setInt(3, cantidad);
+            ps.executeUpdate();
+        }
     }
 }

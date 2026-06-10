@@ -4,10 +4,9 @@
  */
 package Controlador;
 
-import DAO.ClienteDAO;
+import Interface.IClienteDAO;
 import Modelo.Cliente;
 import Vista.Sistema;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,52 +15,38 @@ import javax.swing.table.DefaultTableModel;
  * @author aalex
  */
 public class ClienteController {
-    private Sistema vista;
-    private ClienteDAO clienteDAO;
 
-    public ClienteController(Sistema vista) {
+    private Sistema vista;
+    private IClienteDAO clienteDAO;
+
+    public ClienteController(Sistema vista, IClienteDAO clienteDAO) {
         this.vista = vista;
-        this.clienteDAO= new ClienteDAO();
+        this.clienteDAO = clienteDAO;
     }
-   
+
+    // Los métodos son similares, solo cambia que usan clienteDAO (interfaz)
     public void agregarCliente() {
-        
         Cliente c = new Cliente();
         c.setDniRUC(vista.txtF_dni.getText());
         c.setNombres(vista.txtF_name.getText());
         c.setTelefono(vista.txtF_telefono.getText());
         c.setCorreo(vista.txtF_correo.getText());
 
-        DefaultTableModel modelo = (DefaultTableModel) vista.t_cliente.getModel();
-
-        modelo.addRow(new Object[]{
-            c.getIdcliente(),
-            c.getDniRUC(),
-            c.getNombres(),
-            c.getTelefono(),
-            c.getCorreo()
-        });
-
-        limpiarCampos();
+        if (clienteDAO.insertar(c)) {
+            listarClientes();
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar cliente");
+        }
     }
 
-    private void limpiarCampos() {
-        vista.txtF_dni.setText("");
-        vista.txtF_name.setText("");
-        vista.txtF_telefono.setText("");
-        vista.txtF_correo.setText("");
-    }
-    
     public void actualizarCliente() {
-
         int fila = vista.t_cliente.getSelectedRow();
         if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un cliente de la tabla");
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente");
             return;
         }
-
         int id = (int) vista.t_cliente.getValueAt(fila, 0);
-
         Cliente c = new Cliente();
         c.setIdcliente(id);
         c.setDniRUC(vista.txtF_dni.getText());
@@ -69,9 +54,7 @@ public class ClienteController {
         c.setTelefono(vista.txtF_telefono.getText());
         c.setCorreo(vista.txtF_correo.getText());
 
-        boolean resultado = clienteDAO.actualizarCliente(c);
-
-        if (resultado) {
+        if (clienteDAO.actualizar(c)) {
             listarClientes();
             limpiarCampos();
             JOptionPane.showMessageDialog(null, "Cliente actualizado");
@@ -79,27 +62,16 @@ public class ClienteController {
             JOptionPane.showMessageDialog(null, "Error al actualizar");
         }
     }
-    
-    public void eliminarCliente() {
 
+    public void eliminarCliente() {
         int fila = vista.t_cliente.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un cliente");
             return;
         }
-
         int id = (int) vista.t_cliente.getValueAt(fila, 0);
-
-        int confirm = JOptionPane.showConfirmDialog(null,
-                "¿Seguro que desea eliminar?",
-                "Confirmar",
-                JOptionPane.YES_NO_OPTION);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-
-            boolean resultado = clienteDAO.eliminarCliente(id);
-
-            if (resultado) {
+        if (JOptionPane.showConfirmDialog(null, "¿Eliminar?") == JOptionPane.YES_OPTION) {
+            if (clienteDAO.eliminar(id)) {
                 listarClientes();
                 limpiarCampos();
                 JOptionPane.showMessageDialog(null, "Cliente eliminado");
@@ -108,34 +80,29 @@ public class ClienteController {
             }
         }
     }
-    
-    public void seleccionarClienteTabla() {
 
+    public void seleccionarClienteTabla() {
         int fila = vista.t_cliente.getSelectedRow();
         if (fila != -1) {
-            
             vista.txtF_dni.setText(vista.t_cliente.getValueAt(fila, 1).toString());
             vista.txtF_name.setText(vista.t_cliente.getValueAt(fila, 2).toString());
             vista.txtF_telefono.setText(vista.t_cliente.getValueAt(fila, 3).toString());
             vista.txtF_correo.setText(vista.t_cliente.getValueAt(fila, 4).toString());
         }
     }
-    
+
     public void listarClientes() {
-    List<Cliente> lista = clienteDAO.listar();
-
-    DefaultTableModel modelo = (DefaultTableModel) vista.t_cliente.getModel();
-    modelo.setRowCount(0);
-
-    for (Cliente c : lista) {
-        modelo.addRow(new Object[]{
-            c.getIdcliente(),
-            c.getDniRUC(),
-            c.getNombres(),
-            c.getTelefono(),
-            c.getCorreo()
-        });
+        DefaultTableModel modelo = (DefaultTableModel) vista.t_cliente.getModel();
+        modelo.setRowCount(0);
+        for (Cliente c : clienteDAO.listar()) {
+            modelo.addRow(new Object[]{c.getIdcliente(), c.getDniRUC(), c.getNombres(), c.getTelefono(), c.getCorreo()});
+        }
     }
-}
-    
+
+    private void limpiarCampos() {
+        vista.txtF_dni.setText("");
+        vista.txtF_name.setText("");
+        vista.txtF_telefono.setText("");
+        vista.txtF_correo.setText("");
+    }
 }

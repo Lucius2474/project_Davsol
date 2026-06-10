@@ -4,15 +4,9 @@
  */
 package Vista;
 
-import Controlador.ClienteController;
-import Controlador.InventarioController;
-import Controlador.ProductoController;
-import Controlador.VentaController;
-import Modelo.Producto;
-import java.awt.event.KeyEvent;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Controlador.*;
+import Interface.*;
+import DAO.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -39,10 +33,19 @@ public class Sistema extends javax.swing.JFrame {
         setTitle("Dabsol Eco Systems");
         setLocationRelativeTo(null);
         this.repaint();
-        clienteController = new ClienteController(this);
-        productoController = new ProductoController(this);
-        inventarioController = new InventarioController(this);
-        ventaController = new VentaController(this,productoController);
+        // Crear instancias de DAOs concretos
+        IClienteDAO clienteDAO = new ClienteDAO();
+        IProductoDAO productoDAO = new ProductoDAO();
+        IInventarioDAO inventarioDAO = new InventarioDAO();
+        IMovimientoInventarioDAO movimientoDAO = new MovimientoInventarioDAO();
+        IVentaDAO ventaDAO = new VentaDAO();
+        IDetalleVentaDAO detalleDAO = new DetalleVentaDAO();
+
+        // Controladores con dependencias
+        clienteController = new ClienteController(this, clienteDAO);
+        productoController = new ProductoController(this, productoDAO);
+        inventarioController = new InventarioController(this, inventarioDAO, productoDAO, movimientoDAO);
+        ventaController = new VentaController(this, productoController, clienteDAO, ventaDAO, detalleDAO, inventarioDAO, movimientoDAO);
         
         txtF_ruc.getDocument().addDocumentListener(new DocumentListener() {
                 public void insertUpdate(DocumentEvent e) { ventaController.autocompletarCliente(); }
@@ -843,7 +846,7 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_txtF_totalActionPerformed
 
     private void btn_desFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desFacturaActionPerformed
-        ventaController.ProcesarVentaCompleta();
+        ventaController.procesarVentaCompleta();
        
     }//GEN-LAST:event_btn_desFacturaActionPerformed
 
