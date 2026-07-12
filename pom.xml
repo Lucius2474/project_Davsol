@@ -16,6 +16,12 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>9.6.0</version> <!-- Usa la versión más reciente -->
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext7-core</artifactId>
+            <version>9.6.0</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

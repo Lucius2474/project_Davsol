@@ -78,6 +78,7 @@ public class InventarioController {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Cantidad inválida");
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }

@@ -27,6 +27,7 @@ public class VentaController {
     private IInventarioDAO inventarioDAO; 
     private List<DetalleVenta> detallesTemp;
     private Cliente clienteActual;
+    private VentaPDF ventaPDF;
     private double totalPagar;
     
 
@@ -177,6 +178,7 @@ public class VentaController {
         try {
             int idVenta = ventaService.procesarVenta(venta, detallesTemp);
             JOptionPane.showMessageDialog(null, "Venta registrada con ID: " + idVenta);
+            ventaPDF.generarFacturaPDF(clienteActual);
             // Limpiar carrito
             DefaultTableModel model = (DefaultTableModel) vista.t_regVent.getModel();
             model.setRowCount(0);
@@ -189,4 +191,5 @@ public class VentaController {
             JOptionPane.showMessageDialog(null, "Error al registrar venta: " + e.getMessage());
         }
     }
+    
 }

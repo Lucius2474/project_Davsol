@@ -18,16 +18,40 @@ public class ProductoDAO implements Interface.IProductoDAO{
     
     @Override
     public boolean insertar(Producto p) {
-        String sql = "INSERT INTO producto(nombre, descripcion, precio) VALUES(?,?,?)";
-        try (Connection con = ConnectionMySQL.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, p.getNombreProducto());
-            ps.setString(2, p.getDescripcion());
-            ps.setDouble(3, p.getPrecio());
-            return ps.executeUpdate() > 0;
+        Connection con = null;
+        try {
+            con = ConnectionMySQL.getConexion();
+            con.setAutoCommit(false);
+
+            // Insertar producto
+            String sqlProd = "INSERT INTO producto(nombre, descripcion, precio) VALUES(?,?,?)";
+            PreparedStatement psProd = con.prepareStatement(sqlProd, Statement.RETURN_GENERATED_KEYS);
+            psProd.setString(1, p.getNombreProducto());
+            psProd.setString(2, p.getDescripcion());
+            psProd.setDouble(3, p.getPrecio());
+            int affected = psProd.executeUpdate();
+            if (affected == 0) throw new SQLException("No se pudo insertar el producto");
+
+            ResultSet rs = psProd.getGeneratedKeys();
+            if (rs.next()) {
+                int idProducto = rs.getInt(1);
+                // Insertar en inventario con stock 0
+                String sqlInv = "INSERT INTO inventario(id_producto, stock_actual) VALUES(?,0)";
+                PreparedStatement psInv = con.prepareStatement(sqlInv);
+                psInv.setInt(1, idProducto);
+                psInv.executeUpdate();
+            } else {
+                throw new SQLException("No se pudo obtener el ID del producto");
+            }
+
+            con.commit();
+            return true;
         } catch (SQLException e) {
+            try { if (con != null) con.rollback(); } catch (SQLException ex) {}
             System.out.println("Error insertar producto: " + e.getMessage());
             return false;
+        } finally {
+            try { if (con != null) con.close(); } catch (SQLException e) {}
         }
     }
 

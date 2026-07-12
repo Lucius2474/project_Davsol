@@ -7,6 +7,7 @@ package Vista;
 import Controlador.*;
 import Interface.*;
 import DAO.*;
+import Modelo.Cliente;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -22,6 +23,7 @@ public class Sistema extends javax.swing.JFrame {
     private ProductoController productoController;
     private InventarioController inventarioController;
     private VentaController ventaController;
+    private VentaPDF ventaPDF;
     
     
     
@@ -46,6 +48,7 @@ public class Sistema extends javax.swing.JFrame {
         productoController = new ProductoController(this, productoDAO);
         inventarioController = new InventarioController(this, inventarioDAO, productoDAO, movimientoDAO);
         ventaController = new VentaController(this, productoController, clienteDAO, ventaDAO, detalleDAO, inventarioDAO, movimientoDAO);
+        ventaPDF = new VentaPDF(this);
         
         txtF_ruc.getDocument().addDocumentListener(new DocumentListener() {
                 public void insertUpdate(DocumentEvent e) { ventaController.autocompletarCliente(); }
@@ -863,7 +866,7 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btn_desFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desFacturaActionPerformed
         ventaController.procesarVentaCompleta();
-       
+        
     }//GEN-LAST:event_btn_desFacturaActionPerformed
 
     private void txtF_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_nombreActionPerformed
@@ -901,6 +904,8 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btn_registrarProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarProductActionPerformed
         productoController.registrarProducto();
+        inventarioController.cargarProductos();
+        ventaController.cargarProductosEnCombo();
     }//GEN-LAST:event_btn_registrarProductActionPerformed
 
     private void btn_actualizarProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarProductActionPerformed
@@ -945,6 +950,7 @@ public class Sistema extends javax.swing.JFrame {
 
     private void btn_agregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarVentaActionPerformed
         ventaController.agregarProducto();
+        ventaController.cargarProductosEnCombo();
     }//GEN-LAST:event_btn_agregarVentaActionPerformed
 
     private void btn_deleteVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteVentaActionPerformed
