@@ -66,6 +66,11 @@ public class InventarioController {
                 JOptionPane.showMessageDialog(null, "Seleccione un producto");
                 return;
             }
+            if (!Validador.esNumerico(vista.txtF_cantidadInventario.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            vista.txtF_cantidadInventario.setText("");
+            return;
+            }
             int cantidad = Integer.parseInt(vista.txtF_cantidadInventario.getText());
             if (cantidad <= 0) throw new NumberFormatException();
             String tipo = vista.cbox_movimiento.getSelectedItem().toString();

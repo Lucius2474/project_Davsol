@@ -26,6 +26,21 @@ public class ClienteController {
 
     // Los métodos son similares, solo cambia que usan clienteDAO (interfaz)
     public void agregarCliente() {
+        if (!Validador.esNumerico(vista.txtF_dni.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
+            return;
+        }
+        if (!Validador.esNumerico(vista.txtF_telefono.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
+            return;
+        }
+        if (!Validador.esCorreo(vista.txtF_correo.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
+            return;
+        }
         Cliente c = new Cliente();
         c.setDniRUC(vista.txtF_dni.getText());
         c.setNombres(vista.txtF_name.getText());
@@ -44,6 +59,21 @@ public class ClienteController {
         int fila = vista.t_cliente.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un cliente");
+            return;
+        }
+        if (!Validador.esNumerico(vista.txtF_dni.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
+            return;
+        }
+        if (!Validador.esNumerico(vista.txtF_telefono.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
+            return;
+        }
+        if (!Validador.esCorreo(vista.txtF_correo.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
             return;
         }
         int id = (int) vista.t_cliente.getValueAt(fila, 0);

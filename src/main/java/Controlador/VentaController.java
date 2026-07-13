@@ -85,6 +85,8 @@ public class VentaController {
             JOptionPane.showMessageDialog(vista, "Cantidad inválida");
             return;
         }
+        
+
 
         Producto prod = getProductoSeleccionado();
         if (prod == null) {
@@ -146,8 +148,14 @@ public class VentaController {
         vista.txtF_precio.setText("");
         vista.txtF_stockDis.setText("");
     }
+    
 
     public void autocompletarCliente() {
+        if (!Validador.esNumerico(vista.txtF_ruc.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            vista.txtF_ruc.setText("");
+            return;
+        }
         String dni = vista.txtF_ruc.getText();
         if (dni.length() >= 8) {
             Cliente c = clienteDAO.buscarPorRUC(dni);

@@ -50,11 +50,11 @@ public class Sistema extends javax.swing.JFrame {
         ventaController = new VentaController(this, productoController, clienteDAO, ventaDAO, detalleDAO, inventarioDAO, movimientoDAO);
         ventaPDF = new VentaPDF(this);
         
-        txtF_ruc.getDocument().addDocumentListener(new DocumentListener() {
+        /*txtF_ruc.getDocument().addDocumentListener(new DocumentListener() {
                 public void insertUpdate(DocumentEvent e) { ventaController.autocompletarCliente(); }
                 public void removeUpdate(DocumentEvent e) { ventaController.autocompletarCliente(); }
                 public void changedUpdate(DocumentEvent e) { ventaController.autocompletarCliente(); }
-            });
+            });*/
         
         clienteController.listarClientes();
         productoController.listarProductos();
@@ -958,7 +958,7 @@ public class Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deleteVentaActionPerformed
 
     private void txtF_rucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_rucActionPerformed
-        // TODO add your handling code here:
+        ventaController.autocompletarCliente();
     }//GEN-LAST:event_txtF_rucActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

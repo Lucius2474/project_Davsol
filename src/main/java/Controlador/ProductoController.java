@@ -27,11 +27,16 @@ public class ProductoController {
     }
 
     public void registrarProducto() {
+        if (!Validador.esNumerico(vista.txtF_precioProduct.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            vista.txtF_precioProduct.setText("");
+            return;
+        }
         Producto p = new Producto();
         p.setNombreProducto(vista.txtF_nombreproduct.getText());
         p.setDescripcion(vista.txtF_descripcion.getText());
         p.setPrecio(Double.parseDouble(vista.txtF_precioProduct.getText()));
-
+        
         if (productoDAO.insertar(p)) {
             listarProductos();
             limpiarCampos();
@@ -52,6 +57,11 @@ public class ProductoController {
         int fila = vista.t_product.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
+            return;
+        }
+        if (!Validador.esNumerico(vista.txtF_precioProduct.getText())) {
+            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            vista.txtF_precioProduct.setText("");
             return;
         }
         int id = (int) vista.t_product.getValueAt(fila, 0);
