@@ -5,12 +5,21 @@
 package Vista;
 
 import javax.swing.UIManager;
-
+import Controlador.LoginController;
+import DAO.UsuarioDAO;
+import Interface.IUsuarioDAO;
+import Modelo.Usuario;
+import util.PasswordUtil;
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 /**
  *
  * @author aalex
  */
 public class Login extends javax.swing.JFrame {
+    private LoginController loginController;
+    private IUsuarioDAO usuarioDAO;
 
     /**
      * Creates new form Login
@@ -22,6 +31,24 @@ public class Login extends javax.swing.JFrame {
         setTitle("Dabsol Eco Systems");
         setLocationRelativeTo(null);
         this.repaint();
+        
+        usuarioDAO = new UsuarioDAO();
+        loginController = new LoginController(this, usuarioDAO);
+        
+        
+    }
+    
+    public String getUsername() {
+        return txt_username.getText();
+    }
+
+    public String getPassword() {
+        return new String(txt_password.getPassword());
+    }
+    
+    public void cerrarVentana() {
+        this.setVisible(false);
+        this.dispose();
     }
 
     /**
@@ -98,25 +125,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
-        // TODO add your handling code here:
+        btn_enter.doClick();
     }//GEN-LAST:event_txt_passwordActionPerformed
 
     private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
-        // TODO add your handling code here:
+        txt_password.requestFocus();
     }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void btn_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enterActionPerformed
-        String user = txt_username.getText().trim();
-        String pass = new String(txt_password.getPassword());
-        if (user.isEmpty() || pass.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña.", "Dabsol Eco Systems", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        // TODO: validate against DB (Usuario/Autenticar) when you have UsuarioDAO
-        this.setVisible(false);
-        this.dispose();
-        Sistema sistema = new Sistema();
-        sistema.setVisible(true);
+        loginController.autenticar();
     }//GEN-LAST:event_btn_enterActionPerformed
 
     /**

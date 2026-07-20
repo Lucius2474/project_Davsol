@@ -10,7 +10,7 @@ import jakarta.validation.ValidatorFactory;
 import java.util.regex.Pattern;
 
 public class Validador {
-    private static final Pattern CORREO_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$");
+    private static final Pattern CORREO_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     private static final Pattern NUMERICO_PATTERN = Pattern.compile("^[0-9]+$");
     private static final Pattern ALFA_PATTERN = Pattern.compile("^[a-zA-Z]+$");
 

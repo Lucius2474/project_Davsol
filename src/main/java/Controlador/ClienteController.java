@@ -27,17 +27,17 @@ public class ClienteController {
     // Los métodos son similares, solo cambia que usan clienteDAO (interfaz)
     public void agregarCliente() {
         if (!Validador.esNumerico(vista.txtF_dni.getText())) {
-            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "El campo no admite el dni","Error",JOptionPane.ERROR_MESSAGE);
             limpiarCampos();
             return;
         }
         if (!Validador.esNumerico(vista.txtF_telefono.getText())) {
-            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "El campo no admite el telefono","Error",JOptionPane.ERROR_MESSAGE);
             limpiarCampos();
             return;
         }
         if (!Validador.esCorreo(vista.txtF_correo.getText())) {
-            JOptionPane.showMessageDialog(vista, "El campo no admite el contenido","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "El campo no admite el correo","Error",JOptionPane.ERROR_MESSAGE);
             limpiarCampos();
             return;
         }
