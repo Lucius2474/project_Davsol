@@ -53,13 +53,13 @@ public class ClienteDAO implements Interface.IClienteDAO{
 
     @Override
     public boolean eliminar(int idCliente) {
-        String sql = "DELETE FROM cliente WHERE id_cliente=?";
+        String sql = "UPDATE cliente SET activo = 0 WHERE id_cliente = ?";
         try (Connection con = ConnectionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idCliente);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("Error eliminar cliente: " + e.getMessage());
+            System.out.println("Error al desactivar cliente: " + e.getMessage());
             return false;
         }
     }
@@ -67,7 +67,7 @@ public class ClienteDAO implements Interface.IClienteDAO{
     @Override
     public List<Cliente> listar() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM cliente WHERE activo = 1";
         try (Connection con = ConnectionMySQL.getConexion();
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -88,7 +88,7 @@ public class ClienteDAO implements Interface.IClienteDAO{
 
     @Override
     public Cliente buscarPorRUC(String dni) {
-        String sql = "SELECT * FROM cliente WHERE dni = ?";
+        String sql = "SELECT * FROM cliente WHERE dni = ? AND activo = 1";
         try (Connection con = ConnectionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, dni);

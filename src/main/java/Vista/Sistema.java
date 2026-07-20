@@ -7,9 +7,6 @@ package Vista;
 import Controlador.*;
 import Interface.*;
 import DAO.*;
-import Modelo.Cliente;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 
 

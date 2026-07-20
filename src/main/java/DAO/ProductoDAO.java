@@ -58,7 +58,7 @@ public class ProductoDAO implements Interface.IProductoDAO{
     @Override
     public List<Producto> listar() {
         List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT * FROM producto";
+        String sql = "SELECT * FROM producto WHERE activo = 1";
         try (Connection con = ConnectionMySQL.getConexion();
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -94,7 +94,7 @@ public class ProductoDAO implements Interface.IProductoDAO{
 
     @Override
     public boolean eliminar(int idProducto) {
-        String sql = "DELETE FROM producto WHERE id_producto=?";
+        String sql = "UPDATE producto SET activo = 0 WHERE id_cliente = ?";
         try (Connection con = ConnectionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idProducto);
