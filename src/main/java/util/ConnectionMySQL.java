@@ -3,24 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package util;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.util.Properties;
 /**
  *
  * @author aalex
  */
 public class ConnectionMySQL {
     
-    //Recomendado usar un driver misma version que mysql
-    
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/sistemaAbsol";
-    private static final String USER = "root";
-    private static final String PASSWORD = "escate/7845";
 
     public static Connection getConexion() {
+        Properties propiedades = new Properties();
         try {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            propiedades.load(new FileInputStream("config.properties"));
+            
+            String ip = propiedades.getProperty("db.ip");
+            String puerto = propiedades.getProperty("db.puerto");
+            String db = propiedades.getProperty("db.nombre");
+            String user = propiedades.getProperty("db.usuario");
+            String password = propiedades.getProperty("db.password");
+            
+            String url = "jdbc:mysql://" + ip + ":" + puerto + "/" + db;
+            
+            return DriverManager.getConnection(url, user, password);
+        } catch (IOException e) {
+            System.out.println("Error: No se encontró el archivo config.properties externo.");
+            return null;
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
             return null;
