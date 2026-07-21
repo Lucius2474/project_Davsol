@@ -184,10 +184,10 @@ public class Sistema extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 127));
+        jPanel1.setBackground(new java.awt.Color(85, 97, 139));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 127));
+        jPanel3.setBackground(new java.awt.Color(71, 83, 123));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButnCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -226,9 +226,9 @@ public class Sistema extends javax.swing.JFrame {
         });
         jPanel3.add(jButnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 130, 35));
 
-        jLabel3.setBackground(new java.awt.Color(16, 116, 234));
+        jLabel3.setBackground(new java.awt.Color(71, 83, 123));
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(204, 204, 255));
         jLabel3.setText("NAVEGAR");
         jLabel3.setOpaque(true);
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
@@ -240,9 +240,9 @@ public class Sistema extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 700));
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 127));
+        jLabel2.setBackground(new java.awt.Color(71, 83, 123));
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 40)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(204, 204, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("PUNTO DE VENTA");
         jLabel2.setOpaque(true);
@@ -879,7 +879,7 @@ public class Sistema extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
