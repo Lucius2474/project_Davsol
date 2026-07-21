@@ -28,6 +28,8 @@ public class VentaController {
     private List<DetalleVenta> detallesTemp;
     private Cliente clienteActual;
     private VentaPDF ventaPDF;
+    private double subtotalVenta;
+    private double igvVenta;
     private double totalPagar;
     
 
@@ -42,12 +44,14 @@ public class VentaController {
         this.ventaService = new VentaService(ventaDAO, detalleDAO, inventarioDAO, movimientoDAO);
         this.inventarioDAO = inventarioDAO;
         this.detallesTemp = new ArrayList<>();
+        this.ventaPDF = new VentaPDF(vista);
+        
+        
     }
 
     public void cargarProductosEnCombo() {
-        productoController.listarProductos(); // llena el combo indirectamente
-        // pero mejor: llenar cbox_producto1 con nombres de productos
-        var productos = productoController.productoDAO.listar(); // necesitas acceso, ajusta
+        productoController.listarProductos();
+        var productos = productoController.productoDAO.listar(); 
         vista.cbox_producto1.removeAllItems();
         for (Producto p : productos) {
             vista.cbox_producto1.addItem(p.getNombreProducto());
@@ -63,9 +67,7 @@ public class VentaController {
         Producto p = getProductoSeleccionado();
         if (p == null) return;
         vista.txtF_precio.setText(String.valueOf(p.getPrecio()));
-        // Obtener stock desde inventario
-        // (deberías tener un método en InventarioController o acceder a inventarioDAO)
-        // Simplificamos: asumimos que tienes inventarioDAO
+  
         int stock = inventarioDAO.obtenerStockActual(p.getIdproducto());
         vista.txtF_stockDis.setText(String.valueOf(stock));
         vista.txtF_cantidad.setText("");
@@ -139,9 +141,19 @@ public class VentaController {
     }
 
     private void recalcularTotal() {
-        totalPagar = detallesTemp.stream().mapToDouble(DetalleVenta::getSubtotal).sum();
-        vista.txtF_total.setText(String.format("%.2f", totalPagar));
-    }
+
+    double subtotal = detallesTemp.stream()
+            .mapToDouble(DetalleVenta::getSubtotal)
+            .sum();
+
+    double igv = subtotal * 0.18;
+
+    totalPagar = subtotal + igv;
+
+    vista.txtF_subtotal.setText(String.format("%.2f", subtotal));
+    vista.txtF_igv.setText(String.format("%.2f", igv));
+    vista.txtF_total.setText(String.format("%.2f", totalPagar));
+}
 
     private void limpiarCamposProducto() {
         vista.txtF_cantidad.setText("");
@@ -179,20 +191,24 @@ public class VentaController {
             return;
         }
 
+        double subtotal = totalPagar;
+        double igv = subtotal * 0.18;
+        double totalConIGV = subtotal + igv;
         Venta venta = new Venta();
         venta.setIdcliente(clienteActual.getIdcliente());
-        venta.setTotal(totalPagar);
+        venta.setTotal(totalConIGV);
 
         try {
             int idVenta = ventaService.procesarVenta(venta, detallesTemp);
             JOptionPane.showMessageDialog(null, "Venta registrada con ID: " + idVenta);
             ventaPDF.generarFacturaPDF(clienteActual);
+            
             // Limpiar carrito
             DefaultTableModel model = (DefaultTableModel) vista.t_regVent.getModel();
             model.setRowCount(0);
             detallesTemp.clear();
             totalPagar = 0;
-            vista.txtF_total.setText("");
+            vista.txtF_subtotal.setText("");
             vista.txtF_ruc.setText("");
             vista.txtF_nombre.setText("");
         } catch (Exception e) {

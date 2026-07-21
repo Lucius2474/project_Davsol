@@ -94,7 +94,7 @@ public class ProductoDAO implements Interface.IProductoDAO{
 
     @Override
     public boolean eliminar(int idProducto) {
-        String sql = "UPDATE producto SET activo = 0 WHERE id_cliente = ?";
+        String sql = "UPDATE producto SET activo = 0 WHERE id_producto = ?";
         try (Connection con = ConnectionMySQL.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idProducto);

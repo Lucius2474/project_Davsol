@@ -35,6 +35,7 @@ public class InventarioController {
         this.productoDAO = productoDAO;
         this.inventarioService = new InventarioService(inventarioDAO, movimientoDAO);
         this.mapaProductos = new HashMap<>();
+        
     }
 
     public void cargarProductos() {
@@ -88,6 +89,7 @@ public class InventarioController {
         }
     }
 
+    
     public void listarMovimientos() {
         DefaultTableModel modelo = (DefaultTableModel) vista.t_inventario.getModel();
         modelo.setRowCount(0);

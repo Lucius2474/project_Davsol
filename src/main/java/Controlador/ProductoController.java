@@ -86,7 +86,7 @@ public class ProductoController {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
             return;
         }
-        int id = (int) vista.t_product.getValueAt(fila, 0);
+        int id = Integer.parseInt(vista.t_product.getValueAt(fila, 0).toString());
         if (JOptionPane.showConfirmDialog(null, "¿Eliminar?") == JOptionPane.YES_OPTION) {
             if (productoDAO.eliminar(id)) {
                 listarProductos();

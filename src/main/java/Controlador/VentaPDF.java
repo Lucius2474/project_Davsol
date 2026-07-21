@@ -1,173 +1,640 @@
 package Controlador;
 
-
 import Modelo.Cliente;
+import Vista.Sistema;
+
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
-import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.layout.properties.VerticalAlignment;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import Vista.Sistema;
 
-/**
- *
- * @author edison
- */
 public class VentaPDF {
-    
+
     private Sistema vista;
+
     private String fechaActual = "";
-    private String nombreArchivoPDFVenta = "";  
+    private String nombreArchivoPDFVenta = "";
 
     public VentaPDF(Sistema vista) {
         this.vista = vista;
     }
-    
-    
-    
-    //metodo para generar la factura de venta
+
     public void generarFacturaPDF(Cliente cliente) {
-        // 1. Preparar fecha y nombre de archivo
-        fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-        String fechaNueva = fechaActual.replace("/", "_"); // más simple
-        nombreArchivoPDFVenta = "Venta_" + cliente.getNombres() + "_" + fechaNueva + ".pdf";
-        File file = new File("src/pdf/" + nombreArchivoPDFVenta);
-        file.getParentFile().mkdirs(); // asegurar que la carpeta exista
 
-        // 2. Crear el documento con iText 7
-        try (FileOutputStream fos = new FileOutputStream(file);
-                PdfWriter writer = new PdfWriter(fos); 
+        fechaActual = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+        String fechaArchivo = new SimpleDateFormat(
+                "yyyy_MM_dd_HH_mm_ss"
+        ).format(new Date());
+
+        nombreArchivoPDFVenta =
+                "Venta_"
+                + cliente.getNombres().replaceAll("[^a-zA-Z0-9]", "_")
+                + "_"
+                + fechaArchivo
+                + ".pdf";
+
+        File file = new File(
+                "src/pdf/" + nombreArchivoPDFVenta
+        );
+
+        file.getParentFile().mkdirs();
+
+        try (
+                FileOutputStream fos = new FileOutputStream(file);
+                PdfWriter writer = new PdfWriter(fos);
                 PdfDocument pdfDoc = new PdfDocument(writer);
-                Document doc = new Document(pdfDoc, PageSize.A4)) {
+                Document doc = new Document(pdfDoc, PageSize.A4)
+        ) {
 
-            // Fuente base (Times-Roman) y negrita
-            PdfFont normalFont = PdfFontFactory.createFont("Times-Roman");
-            PdfFont boldFont = PdfFontFactory.createFont("Times-Bold");
+            doc.setMargins(35, 35, 35, 35);
 
-            // --- ENCABEZADO (tabla 4 columnas) ---
-            Table headerTable = new Table(UnitValue.createPercentArray(new float[]{20, 30, 70, 40}));
-            headerTable.setWidth(UnitValue.createPercentValue(100));
+            // Fuentes
+            PdfFont normalFont =
+                    PdfFontFactory.createFont("Times-Roman");
 
-            // Imagen
-            /*Image img = new Image(ImageDataFactory.create("src/img/logopdf.png"));
-            img.setAutoScale(true);
-            Cell imgCell = new Cell().add(img).setBorder(Border.NO_BORDER);
-            headerTable.addCell(imgCell);*/
+            PdfFont boldFont =
+                    PdfFontFactory.createFont("Times-Bold");
 
-            // Celda vacía
-            headerTable.addCell(new Cell().setBorder(Border.NO_BORDER));
 
-            // Datos de la empresa
-            String empresaInfo = "RUC: 20605513825\n"
-                    + "NOMBRE: Davsol Eco Systems\n"
-                    + "TELEFONO: 976 601 735\n"
-                    + "DIRECCION: Jr. Ramon Castillo 1451 San Roman - San Roman - Puno\n"
-                    + "RAZON SOCIAL: DAVSOL ECO SYSTEMS PERU SRL";
-            Paragraph empresaPar = new Paragraph(empresaInfo).setFont(normalFont).setFontSize(10);
-            Cell empresaCell = new Cell().add(empresaPar).setBorder(Border.NO_BORDER);
+
+            Table headerTable = new Table(
+                    UnitValue.createPercentArray(
+                            new float[]{20, 50, 30}
+                    )
+            );
+
+            headerTable.setWidth(
+                    UnitValue.createPercentValue(100)
+            );
+
+
+            File logoFile = new File(
+                    "src/img/logopdf.png"
+            );
+
+            if (logoFile.exists()) {
+
+                Image img = new Image(
+                        ImageDataFactory.create(
+                                logoFile.getAbsolutePath()
+                        )
+                );
+
+                img.setWidth(80);
+                img.setHeight(80);
+
+                Cell logoCell = new Cell()
+                        .add(img)
+                        .setBorder(Border.NO_BORDER)
+                        .setVerticalAlignment(
+                                VerticalAlignment.MIDDLE
+                        );
+
+                headerTable.addCell(logoCell);
+
+            } else {
+
+                headerTable.addCell(
+                        new Cell()
+                                .add(
+                                        new Paragraph("DAVSOL")
+                                )
+                                .setFont(boldFont)
+                                .setFontSize(18)
+                                .setBorder(Border.NO_BORDER)
+                );
+            }
+
+            Paragraph empresa = new Paragraph()
+                    .add(
+                            new Paragraph(
+                                    "DAVSOL ECO SYSTEMS"
+                            )
+                                    .setFont(boldFont)
+                                    .setFontSize(15)
+                    )
+                    .add("\nRUC: 20605513825")
+                    .add("\nTeléfono: 976 601 735")
+                    .add(
+                            "\nJr. Ramón Castillo 1451 - "
+                            + "San Román - Puno"
+                    )
+                    .setFont(normalFont)
+                    .setFontSize(9);
+
+            Cell empresaCell = new Cell()
+                    .add(empresa)
+                    .setBorder(Border.NO_BORDER)
+                    .setVerticalAlignment(
+                            VerticalAlignment.MIDDLE
+                    );
+
             headerTable.addCell(empresaCell);
 
-            // Fecha y número de factura
-            String facturaInfo = "Factura: 001\nFecha: " + fechaActual;
-            Paragraph fechaPar = new Paragraph(facturaInfo).setFont(normalFont).setFontSize(10).setTextAlignment(TextAlignment.RIGHT);
-            Cell fechaCell = new Cell().add(fechaPar).setBorder(Border.NO_BORDER);
-            headerTable.addCell(fechaCell);
+          
+            Paragraph comprobante = new Paragraph()
+                    .add("COMPROBANTE DE VENTA\n")
+                    .add("N° 001\n")
+                    .add("Fecha: " + fechaActual)
+                    .setFont(boldFont)
+                    .setFontSize(11)
+                    .setTextAlignment(
+                            TextAlignment.CENTER
+                    );
+
+            Cell comprobanteCell = new Cell()
+                    .add(comprobante)
+                    .setBorder(
+                            new SolidBorder(
+                                    ColorConstants.BLACK,
+                                    1
+                            )
+                    )
+                    .setVerticalAlignment(
+                            VerticalAlignment.MIDDLE
+                    );
+
+            headerTable.addCell(comprobanteCell);
 
             doc.add(headerTable);
 
-            // --- DATOS DEL CLIENTE ---
-            doc.add(new Paragraph("Datos del cliente:").setFont(boldFont).setFontSize(12).setMarginTop(10));
-
-            Table clientTable = new Table(UnitValue.createPercentArray(new float[]{25, 45, 30, 40}));
-            clientTable.setWidth(UnitValue.createPercentValue(100));
-
-            // Encabezados (en negrita) sin bordes
-            String[] labels = {"Cedula/RUC:", "Nombre:", "Teléfono:", "Dirección:"};
-            for (String label : labels) {
-                Cell c = new Cell().add(new Paragraph(label).setFont(boldFont).setFontSize(10));
-                c.setBorder(Border.NO_BORDER);
-                clientTable.addCell(c);
-            }
-            // Valores
-            String[] values = {cliente.getDniRUC(), cliente.getNombres(), cliente.getTelefono(), cliente.getCorreo()};
-            for (String val : values) {
-                Cell c = new Cell().add(new Paragraph(val).setFont(normalFont).setFontSize(10));
-                c.setBorder(Border.NO_BORDER);
-                clientTable.addCell(c);
-            }
-            doc.add(clientTable);
-
-            // Espacio
             doc.add(new Paragraph("\n"));
 
-            // --- TABLA DE PRODUCTOS ---
-            Table productTable = new Table(UnitValue.createPercentArray(new float[]{15, 50, 15, 20}));
-            productTable.setWidth(UnitValue.createPercentValue(100));
 
-            // Encabezados con fondo gris
-            String[] prodLabels = {"Cantidad", "Producto", "Precio Unit.", "Subtotal"};
-            for (String label : prodLabels) {
-                Cell c = new Cell().add(new Paragraph(label).setFont(boldFont).setFontSize(10));
-                c.setBackgroundColor(ColorConstants.LIGHT_GRAY);
-                c.setBorder(Border.NO_BORDER);
-                productTable.addCell(c);
-            }
+            Paragraph tituloCliente =
+                    new Paragraph("DATOS DEL CLIENTE")
+                            .setFont(boldFont)
+                            .setFontSize(12)
+                            .setFontColor(
+                                    ColorConstants.WHITE
+                            )
+                            .setBackgroundColor(
+                                    ColorConstants.DARK_GRAY
+                            )
+                            .setPadding(5);
 
-            // Datos de la tabla de la interfaz (JTable)
+            doc.add(tituloCliente);
+
+            Table clientTable = new Table(
+                    UnitValue.createPercentArray(
+                            new float[]{25, 25, 25, 25}
+                    )
+            );
+
+            clientTable.setWidth(
+                    UnitValue.createPercentValue(100)
+            );
+
+            agregarDatoCliente(
+                    clientTable,
+                    "DNI / RUC",
+                    cliente.getDniRUC(),
+                    boldFont,
+                    normalFont
+            );
+
+            agregarDatoCliente(
+                    clientTable,
+                    "NOMBRE",
+                    cliente.getNombres(),
+                    boldFont,
+                    normalFont
+            );
+
+            agregarDatoCliente(
+                    clientTable,
+                    "TELÉFONO",
+                    cliente.getTelefono(),
+                    boldFont,
+                    normalFont
+            );
+
+            agregarDatoCliente(
+                    clientTable,
+                    "CORREO",
+                    cliente.getCorreo(),
+                    boldFont,
+                    normalFont
+            );
+
+            doc.add(clientTable);
+
+            doc.add(new Paragraph("\n"));
+
+
             
-            for (int i = 0; i < vista.t_regVent.getRowCount(); i++) {
-                // Se toman las columnas según el índice original: 1=producto, 2=cantidad, 3=precio, 7=total
-                String producto = vista.t_regVent.getValueAt(i, 1).toString();
-                String cantidad = vista.t_regVent.getValueAt(i, 0).toString();
-                String precio = vista.t_regVent.getValueAt(i, 2).toString();
-                String total = vista.t_regVent.getValueAt(i, 3).toString();
+            Table productTable = new Table(
+                    UnitValue.createPercentArray(
+                            new float[]{15, 45, 20, 20}
+                    )
+            );
 
-                productTable.addCell(new Cell().add(new Paragraph(cantidad).setFont(normalFont).setFontSize(10)).setBorder(Border.NO_BORDER));
-                productTable.addCell(new Cell().add(new Paragraph(producto).setFont(normalFont).setFontSize(10)).setBorder(Border.NO_BORDER));
-                productTable.addCell(new Cell().add(new Paragraph(precio).setFont(normalFont).setFontSize(10)).setBorder(Border.NO_BORDER));
-                productTable.addCell(new Cell().add(new Paragraph(total).setFont(normalFont).setFontSize(10)).setBorder(Border.NO_BORDER));
+            productTable.setWidth(
+                    UnitValue.createPercentValue(100)
+            );
+
+            String[] encabezados = {
+                "CANTIDAD",
+                "PRODUCTO",
+                "PRECIO UNIT.",
+                "SUBTOTAL"
+            };
+
+            for (String encabezado : encabezados) {
+
+                Cell cell = new Cell()
+                        .add(
+                                new Paragraph(encabezado)
+                                        .setFont(boldFont)
+                                        .setFontSize(9)
+                                        .setTextAlignment(
+                                                TextAlignment.CENTER
+                                        )
+                        )
+                        .setBackgroundColor(
+                                ColorConstants.DARK_GRAY
+                        )
+                        .setFontColor(
+                                ColorConstants.WHITE
+                        )
+                        .setPadding(6);
+
+                productTable.addCell(cell);
             }
+
+            
+            for (
+                    int i = 0;
+                    i < vista.t_regVent.getRowCount();
+                    i++
+            ) {
+
+                String cantidad =
+                        vista.t_regVent
+                                .getValueAt(i, 0)
+                                .toString();
+
+                String producto =
+                        vista.t_regVent
+                                .getValueAt(i, 1)
+                                .toString();
+
+                double precioSinIGV =
+                        Double.parseDouble(
+                                vista.t_regVent
+                                        .getValueAt(i, 2)
+                                        .toString()
+                        );
+
+                double subtotalSinIGV =
+                        Double.parseDouble(
+                                vista.t_regVent
+                                        .getValueAt(i, 3)
+                                        .toString()
+                        );
+
+                Cell cantidadCell = new Cell()
+                        .add(
+                                new Paragraph(cantidad)
+                                        .setFont(normalFont)
+                                        .setFontSize(10)
+                        )
+                        .setTextAlignment(
+                                TextAlignment.CENTER
+                        )
+                        .setPadding(6);
+
+                Cell productoCell = new Cell()
+                        .add(
+                                new Paragraph(producto)
+                                        .setFont(normalFont)
+                                        .setFontSize(10)
+                        )
+                        .setPadding(6);
+
+                Cell precioCell = new Cell()
+                        .add(
+                                new Paragraph(
+                                        String.format(
+                                                "S/ %.2f",
+                                                precioSinIGV
+                                        )
+                                )
+                                        .setFont(normalFont)
+                                        .setFontSize(10)
+                        )
+                        .setTextAlignment(
+                                TextAlignment.RIGHT
+                        )
+                        .setPadding(6);
+
+                Cell subtotalCell = new Cell()
+                        .add(
+                                new Paragraph(
+                                        String.format(
+                                                "S/ %.2f",
+                                                subtotalSinIGV
+                                        )
+                                )
+                                        .setFont(normalFont)
+                                        .setFontSize(10)
+                        )
+                        .setTextAlignment(
+                                TextAlignment.RIGHT
+                        )
+                        .setPadding(6);
+
+                productTable.addCell(cantidadCell);
+                productTable.addCell(productoCell);
+                productTable.addCell(precioCell);
+                productTable.addCell(subtotalCell);
+            }
+
             doc.add(productTable);
 
-            // --- TOTAL ---
-            String totalPagar = vista.txtF_total.getText();
-            Paragraph totalPar = new Paragraph("Total a pagar: " + totalPagar)
-                    .setFont(boldFont).setFontSize(12)
-                    .setTextAlignment(TextAlignment.RIGHT);
-            doc.add(totalPar);
 
-            // El documento se cierra automáticamente por el try-with-resources
+            
+            double subtotalGeneral =
+                    Double.parseDouble(
+                            vista.txtF_subtotal
+                                    .getText()
+                    );
+
+            double igv =
+                    subtotalGeneral * 0.18;
+
+            double totalConIGV =
+                    subtotalGeneral + igv;
+
+  
+            
+            doc.add(new Paragraph("\n"));
+
+            Table totalTable = new Table(
+                    UnitValue.createPercentArray(
+                            new float[]{70, 30}
+                    )
+            );
+
+            totalTable.setWidth(
+                    UnitValue.createPercentValue(100)
+            );
+
+            
+
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            "Subtotal:"
+                                    )
+                            )
+                            .setFont(normalFont)
+                            .setFontSize(11)
+                            .setBorder(
+                                    Border.NO_BORDER
+                            )
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+            );
+
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            String.format(
+                                                    "S/ %.2f",
+                                                    subtotalGeneral
+                                            )
+                                    )
+                            )
+                            .setFont(normalFont)
+                            .setFontSize(11)
+                            .setBorder(
+                                    Border.NO_BORDER
+                            )
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+            );
+
+
+            
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            "IGV (18%):"
+                                    )
+                            )
+                            .setFont(normalFont)
+                            .setFontSize(11)
+                            .setBorder(
+                                    Border.NO_BORDER
+                            )
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+            );
+
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            String.format(
+                                                    "S/ %.2f",
+                                                    igv
+                                            )
+                                    )
+                            )
+                            .setFont(normalFont)
+                            .setFontSize(11)
+                            .setBorder(
+                                    Border.NO_BORDER
+                            )
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+            );
+
+
+
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            "TOTAL A PAGAR:"
+                                    )
+                            )
+                            .setFont(boldFont)
+                            .setFontSize(14)
+                            .setBorder(
+                                    Border.NO_BORDER
+                            )
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+            );
+
+            totalTable.addCell(
+                    new Cell()
+                            .add(
+                                    new Paragraph(
+                                            String.format(
+                                                    "S/ %.2f",
+                                                    totalConIGV
+                                            )
+                                    )
+                            )
+                            .setFont(boldFont)
+                            .setFontSize(14)
+                            .setTextAlignment(
+                                    TextAlignment.RIGHT
+                            )
+                            .setPadding(8)
+                            .setBorder(
+                                    new SolidBorder(
+                                            ColorConstants.BLACK,
+                                            1
+                                    )
+                            )
+            );
+
+            doc.add(totalTable);
+
+
+            doc.add(new Paragraph("\n\n"));
+
+            Paragraph gracias =
+                    new Paragraph(
+                            "¡Gracias por su preferencia!"
+                    )
+                            .setFont(boldFont)
+                            .setFontSize(12)
+                            .setTextAlignment(
+                                    TextAlignment.CENTER
+                            );
+
+            doc.add(gracias);
+
+            Paragraph sistema =
+                    new Paragraph(
+                            "DAVSOL ECO SYSTEMS - "
+                            + "Sistema de Gestión de Ventas"
+                    )
+                            .setFont(normalFont)
+                            .setFontSize(9)
+                            .setTextAlignment(
+                                    TextAlignment.CENTER
+                            );
+
+            doc.add(sistema);
+
+            System.out.println(
+                    "PDF generado correctamente en: "
+                    + file.getAbsolutePath()
+            );
+
         } catch (Exception e) {
-            System.err.println("Error al generar el PDF: " + e.getMessage());
+
+            System.err.println(
+                    "Error al generar el PDF: "
+                    + e.getMessage()
+            );
+
             e.printStackTrace();
+
+            return;
         }
 
-        // 3. Abrir el PDF automáticamente
+
+        
         try {
+
             if (file.exists()) {
-                Desktop.getDesktop().open(file);
+
+                if (Desktop.isDesktopSupported()) {
+
+                    Desktop.getDesktop().open(file);
+
+                } else {
+
+                    System.out.println(
+                            "El sistema no permite abrir "
+                            + "archivos automáticamente."
+                    );
+                }
+
             }
+
         } catch (IOException e) {
-            System.err.println("No se pudo abrir el archivo: " + e.getMessage());
+
+            System.err.println(
+                    "No se pudo abrir el archivo: "
+                    + e.getMessage()
+            );
         }
     }
 
+
+
+    private void agregarDatoCliente(
+            Table tabla,
+            String etiqueta,
+            String valor,
+            PdfFont boldFont,
+            PdfFont normalFont
+    ) {
+
+        Cell etiquetaCell = new Cell()
+                .add(
+                        new Paragraph(etiqueta)
+                                .setFont(boldFont)
+                                .setFontSize(8)
+                )
+                .setBackgroundColor(
+                        ColorConstants.LIGHT_GRAY
+                )
+                .setPadding(5);
+
+        Cell valorCell = new Cell()
+                .add(
+                        new Paragraph(
+                                valor != null
+                                        ? valor
+                                        : "-"
+                        )
+                                .setFont(normalFont)
+                                .setFontSize(9)
+                )
+                .setPadding(5);
+
+        tabla.addCell(etiquetaCell);
+        tabla.addCell(valorCell);
+    }
 }

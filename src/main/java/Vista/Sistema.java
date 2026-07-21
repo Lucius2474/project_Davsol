@@ -120,27 +120,6 @@ public class Sistema extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        RegistroVenta = new javax.swing.JPanel();
-        txt_producto = new javax.swing.JLabel();
-        txt_cantidad = new javax.swing.JLabel();
-        txt_precio = new javax.swing.JLabel();
-        txt_stockDis = new javax.swing.JLabel();
-        txtF_cantidad = new javax.swing.JTextField();
-        txtF_precio = new javax.swing.JTextField();
-        txtF_stockDis = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        t_regVent = new javax.swing.JTable();
-        txt_ruc = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JLabel();
-        btn_deleteVenta = new javax.swing.JButton();
-        txtF_ruc = new javax.swing.JTextField();
-        txtF_nombre = new javax.swing.JTextField();
-        btn_desFactura = new javax.swing.JButton();
-        txt_total = new javax.swing.JLabel();
-        txtF_total = new javax.swing.JTextField();
-        btn_agregarVenta = new javax.swing.JButton();
-        cbox_producto1 = new javax.swing.JComboBox<>();
-        btn_buscarProductRV = new javax.swing.JButton();
         Cliente = new javax.swing.JPanel();
         txt_dni = new javax.swing.JLabel();
         txt_name = new javax.swing.JLabel();
@@ -180,6 +159,31 @@ public class Sistema extends javax.swing.JFrame {
         cbox_movimiento = new javax.swing.JComboBox<>();
         txt_cantidadInventario = new javax.swing.JLabel();
         txtF_cantidadInventario = new javax.swing.JTextField();
+        RegistroVenta = new javax.swing.JPanel();
+        txt_producto = new javax.swing.JLabel();
+        txt_cantidad = new javax.swing.JLabel();
+        txt_precio = new javax.swing.JLabel();
+        txt_stockDis = new javax.swing.JLabel();
+        txtF_cantidad = new javax.swing.JTextField();
+        txtF_precio = new javax.swing.JTextField();
+        txtF_stockDis = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        t_regVent = new javax.swing.JTable();
+        txt_ruc = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JLabel();
+        btn_deleteVenta = new javax.swing.JButton();
+        txtF_ruc = new javax.swing.JTextField();
+        txtF_nombre = new javax.swing.JTextField();
+        btn_desFactura = new javax.swing.JButton();
+        txt_total = new javax.swing.JLabel();
+        txtF_subtotal = new javax.swing.JTextField();
+        btn_agregarVenta = new javax.swing.JButton();
+        cbox_producto1 = new javax.swing.JComboBox<>();
+        btn_buscarProductRV = new javax.swing.JButton();
+        txtF_igv = new javax.swing.JTextField();
+        txtF_total = new javax.swing.JTextField();
+        txt_total1 = new javax.swing.JLabel();
+        txt_total2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,239 +254,6 @@ public class Sistema extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         jTabbedPane1.setToolTipText("");
-
-        RegistroVenta.setBackground(new java.awt.Color(240, 255, 255));
-        RegistroVenta.setOpaque(false);
-
-        txt_producto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_producto.setText("Producto");
-
-        txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_cantidad.setText("Cantidad");
-
-        txt_precio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_precio.setText("Precio");
-
-        txt_stockDis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txt_stockDis.setText("Stock Dis:");
-
-        txtF_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtF_cantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_cantidadActionPerformed(evt);
-            }
-        });
-        txtF_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtF_cantidadKeyReleased(evt);
-            }
-        });
-
-        txtF_precio.setEditable(false);
-        txtF_precio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtF_precio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_precioActionPerformed(evt);
-            }
-        });
-
-        txtF_stockDis.setEditable(false);
-        txtF_stockDis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtF_stockDis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_stockDisActionPerformed(evt);
-            }
-        });
-
-        t_regVent.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        t_regVent.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "CANT", "PRODUCTO", "PRECIO", "SUBTOTAL"
-            }
-        ));
-        jScrollPane1.setViewportView(t_regVent);
-        if (t_regVent.getColumnModel().getColumnCount() > 0) {
-            t_regVent.getColumnModel().getColumn(0).setPreferredWidth(30);
-            t_regVent.getColumnModel().getColumn(1).setPreferredWidth(30);
-            t_regVent.getColumnModel().getColumn(2).setPreferredWidth(30);
-            t_regVent.getColumnModel().getColumn(3).setPreferredWidth(30);
-        }
-
-        txt_ruc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_ruc.setText("DNI/RUC");
-
-        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_nombre.setText("NOMBRES");
-
-        btn_deleteVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        btn_deleteVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_deleteVenta.setEnabled(false);
-        btn_deleteVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteVentaActionPerformed(evt);
-            }
-        });
-
-        txtF_ruc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtF_ruc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_rucActionPerformed(evt);
-            }
-        });
-        txtF_ruc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtF_rucKeyReleased(evt);
-            }
-        });
-
-        txtF_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtF_nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_nombreActionPerformed(evt);
-            }
-        });
-
-        btn_desFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/descargar (2).png"))); // NOI18N
-        btn_desFactura.setText("FACTURA");
-        btn_desFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_desFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_desFacturaActionPerformed(evt);
-            }
-        });
-
-        txt_total.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_total.setText("TOTAL:");
-
-        txtF_total.setEditable(false);
-        txtF_total.setText("-------");
-        txtF_total.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtF_totalActionPerformed(evt);
-            }
-        });
-
-        btn_agregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boton-mas.png"))); // NOI18N
-        btn_agregarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_agregarVenta.setEnabled(false);
-        btn_agregarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarVentaActionPerformed(evt);
-            }
-        });
-
-        cbox_producto1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbox_producto1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btn_buscarProductRV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
-        btn_buscarProductRV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarProductRVActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout RegistroVentaLayout = new javax.swing.GroupLayout(RegistroVenta);
-        RegistroVenta.setLayout(RegistroVentaLayout);
-        RegistroVentaLayout.setHorizontalGroup(
-            RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroVentaLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_producto)
-                            .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_buscarProductRV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_cantidad)
-                            .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_precio)
-                            .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_stockDis)
-                            .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_agregarVenta)
-                            .addComponent(btn_deleteVenta))
-                        .addGap(69, 69, 69))
-                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(RegistroVentaLayout.createSequentialGroup()
-                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_ruc))
-                            .addGap(60, 60, 60)
-                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(54, 54, 54)
-                            .addComponent(btn_desFactura)
-                            .addGap(55, 55, 55)
-                            .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        RegistroVentaLayout.setVerticalGroup(
-            RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RegistroVentaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addComponent(btn_deleteVenta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_agregarVenta))
-                    .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btn_buscarProductRV)
-                                .addGroup(RegistroVentaLayout.createSequentialGroup()
-                                    .addComponent(txt_producto)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(RegistroVentaLayout.createSequentialGroup()
-                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_cantidad)
-                                    .addComponent(txt_precio)
-                                    .addComponent(txt_stockDis))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(RegistroVentaLayout.createSequentialGroup()
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_ruc)
-                            .addComponent(txt_nombre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(RegistroVentaLayout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_total)
-                                .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(btn_desFactura)))
-                .addContainerGap(158, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Registro Venta", RegistroVenta);
 
         Cliente.setBackground(new java.awt.Color(240, 255, 255));
         Cliente.setOpaque(false);
@@ -866,6 +637,287 @@ public class Sistema extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Inventario", Inventario);
 
+        RegistroVenta.setBackground(new java.awt.Color(240, 255, 255));
+        RegistroVenta.setOpaque(false);
+
+        txt_producto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_producto.setText("Producto");
+
+        txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_cantidad.setText("Cantidad");
+
+        txt_precio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_precio.setText("Precio");
+
+        txt_stockDis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_stockDis.setText("Stock Dis:");
+
+        txtF_cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtF_cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_cantidadActionPerformed(evt);
+            }
+        });
+        txtF_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtF_cantidadKeyReleased(evt);
+            }
+        });
+
+        txtF_precio.setEditable(false);
+        txtF_precio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtF_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_precioActionPerformed(evt);
+            }
+        });
+
+        txtF_stockDis.setEditable(false);
+        txtF_stockDis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtF_stockDis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_stockDisActionPerformed(evt);
+            }
+        });
+
+        t_regVent.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        t_regVent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CANT", "PRODUCTO", "PRECIO", "SUBTOTAL"
+            }
+        ));
+        jScrollPane1.setViewportView(t_regVent);
+        if (t_regVent.getColumnModel().getColumnCount() > 0) {
+            t_regVent.getColumnModel().getColumn(0).setPreferredWidth(30);
+            t_regVent.getColumnModel().getColumn(1).setPreferredWidth(30);
+            t_regVent.getColumnModel().getColumn(2).setPreferredWidth(30);
+            t_regVent.getColumnModel().getColumn(3).setPreferredWidth(30);
+        }
+
+        txt_ruc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_ruc.setText("DNI/RUC");
+
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_nombre.setText("NOMBRES");
+
+        btn_deleteVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        btn_deleteVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_deleteVenta.setEnabled(false);
+        btn_deleteVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteVentaActionPerformed(evt);
+            }
+        });
+
+        txtF_ruc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtF_ruc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_rucActionPerformed(evt);
+            }
+        });
+        txtF_ruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtF_rucKeyReleased(evt);
+            }
+        });
+
+        txtF_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtF_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_nombreActionPerformed(evt);
+            }
+        });
+
+        btn_desFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/descargar (2).png"))); // NOI18N
+        btn_desFactura.setText("FACTURA");
+        btn_desFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_desFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_desFacturaActionPerformed(evt);
+            }
+        });
+
+        txt_total.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_total.setText("SUBTOTAL:");
+
+        txtF_subtotal.setEditable(false);
+        txtF_subtotal.setText("-------");
+        txtF_subtotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_subtotalActionPerformed(evt);
+            }
+        });
+
+        btn_agregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boton-mas.png"))); // NOI18N
+        btn_agregarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_agregarVenta.setEnabled(false);
+        btn_agregarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarVentaActionPerformed(evt);
+            }
+        });
+
+        cbox_producto1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbox_producto1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbox_producto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_producto1ActionPerformed(evt);
+            }
+        });
+
+        btn_buscarProductRV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        btn_buscarProductRV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarProductRVActionPerformed(evt);
+            }
+        });
+
+        txtF_igv.setEditable(false);
+        txtF_igv.setText("-------");
+        txtF_igv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_igvActionPerformed(evt);
+            }
+        });
+
+        txtF_total.setEditable(false);
+        txtF_total.setText("-------");
+        txtF_total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtF_totalActionPerformed(evt);
+            }
+        });
+
+        txt_total1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_total1.setText("TOTAL:");
+
+        txt_total2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_total2.setText("IGV:");
+
+        javax.swing.GroupLayout RegistroVentaLayout = new javax.swing.GroupLayout(RegistroVenta);
+        RegistroVenta.setLayout(RegistroVentaLayout);
+        RegistroVentaLayout.setHorizontalGroup(
+            RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegistroVentaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_producto)
+                            .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_buscarProductRV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_cantidad)
+                            .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_precio)
+                            .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_stockDis)
+                            .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_agregarVenta)
+                            .addComponent(btn_deleteVenta))
+                        .addGap(51, 51, 51))
+                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(RegistroVentaLayout.createSequentialGroup()
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_ruc)
+                                        .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(59, 59, 59)
+                                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                            .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(55, 55, 55)
+                                            .addComponent(btn_desFactura)))
+                                    .addGap(60, 60, 60)
+                                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_total1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_total2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_total))
+                            .addGap(18, 18, 18)
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtF_igv, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtF_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+        RegistroVentaLayout.setVerticalGroup(
+            RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegistroVentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addComponent(btn_deleteVenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_agregarVenta))
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btn_buscarProductRV)
+                                .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                    .addComponent(txt_producto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cbox_producto1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_cantidad)
+                                    .addComponent(txt_precio)
+                                    .addComponent(txt_stockDis))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtF_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtF_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtF_stockDis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtF_subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_total)))
+                            .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txt_ruc)
+                                            .addComponent(txt_nombre))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtF_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtF_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btn_desFactura)
+                                        .addComponent(txtF_igv, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_total2)))))
+                        .addGap(46, 46, 46))
+                    .addGroup(RegistroVentaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RegistroVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtF_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_total1))))
+                .addContainerGap(140, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Registro Venta", RegistroVenta);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -894,9 +946,9 @@ public class Sistema extends javax.swing.JFrame {
         inventarioController.procesarMovimiento();
     }//GEN-LAST:event_btn_procesarMovimientoActionPerformed
 
-    private void txtF_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_totalActionPerformed
+    private void txtF_subtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_subtotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtF_totalActionPerformed
+    }//GEN-LAST:event_txtF_subtotalActionPerformed
 
     private void btn_desFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_desFacturaActionPerformed
         ventaController.procesarVentaCompleta();
@@ -1011,6 +1063,18 @@ public class Sistema extends javax.swing.JFrame {
         jTabbedPane1.setSelectedComponent(Inventario);
     }//GEN-LAST:event_jButnInventarioActionPerformed
 
+    private void cbox_producto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_producto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_producto1ActionPerformed
+
+    private void txtF_igvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_igvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtF_igvActionPerformed
+
+    private void txtF_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtF_totalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtF_totalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1090,6 +1154,7 @@ public class Sistema extends javax.swing.JFrame {
     public javax.swing.JTextField txtF_correo;
     public javax.swing.JTextField txtF_descripcion;
     public javax.swing.JTextField txtF_dni;
+    public javax.swing.JTextField txtF_igv;
     public javax.swing.JTextField txtF_name;
     public javax.swing.JTextField txtF_nombre;
     public javax.swing.JTextField txtF_nombreproduct;
@@ -1098,6 +1163,7 @@ public class Sistema extends javax.swing.JFrame {
     public javax.swing.JTextField txtF_ruc;
     public javax.swing.JTextField txtF_stock;
     public javax.swing.JTextField txtF_stockDis;
+    public javax.swing.JTextField txtF_subtotal;
     public javax.swing.JTextField txtF_telefono;
     public javax.swing.JTextField txtF_total;
     public javax.swing.JLabel txt_cantidad;
@@ -1118,5 +1184,7 @@ public class Sistema extends javax.swing.JFrame {
     public javax.swing.JLabel txt_stockDis;
     public javax.swing.JLabel txt_telefono;
     public javax.swing.JLabel txt_total;
+    public javax.swing.JLabel txt_total1;
+    public javax.swing.JLabel txt_total2;
     // End of variables declaration//GEN-END:variables
 }
