@@ -141,7 +141,7 @@ public class VentaPDF {
                     .add("\nTeléfono: 976 601 735")
                     .add(
                             "\nJr. Ramón Castillo 1451 - "
-                            + "San Román - Puno"
+                            + "ICA_PERÚ"
                     )
                     .setFont(normalFont)
                     .setFontSize(9);

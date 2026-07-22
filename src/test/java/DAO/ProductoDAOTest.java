@@ -11,12 +11,10 @@ public class ProductoDAOTest {
 
     private static ProductoDAO productoDAO;
 
-    // Datos para el NUEVO producto de prueba (sigue la temática de termas solares)
     private static final String NOMBRE_NUEVO = "Terma Solar Hybrid 250L";
     private static final String DESC_NUEVA = "Sistema híbrido avanzado para hoteles";
     private static final double PRECIO_NUEVO = 880.00;
 
-    // ID guardado para poder desactivarlo al final
     private static int idProductoInsertado = 0;
 
     @BeforeAll
@@ -36,7 +34,6 @@ public class ProductoDAOTest {
         boolean insertado = productoDAO.insertar(nuevo);
         assertTrue(insertado, "El producto debe insertarse correctamente con transacción");
 
-        // Obtenemos el producto recién insertado desde la lista para guardar su ID generado
         List<Producto> lista = productoDAO.listar();
         Producto registrado = lista.stream()
                 .filter(p -> NOMBRE_NUEVO.equalsIgnoreCase(p.getNombreProducto()))

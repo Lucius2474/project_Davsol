@@ -11,15 +11,15 @@ public class ClienteDAOTest {
 
     private static ClienteDAO clienteDAO;
 
-    // DNI ÚNICO y no registrado en tu BD para evitar violar la restricción UNIQUE
-    private static final String DNI_NUEVO_UNICO = "65489984"; 
-    private static final String NOMBRE_NUEVO = "Jacinto";
-    private static final String TEL_NUEVO = "987554399";
-    private static final String CORREO_NUEVO = "jacinto@gmail.com";
+ 
+    private static final String DNI_NUEVO_UNICO = "75320719"; 
+    private static final String NOMBRE_NUEVO = "Oliver";
+    private static final String TEL_NUEVO = "987334399";
+    private static final String CORREO_NUEVO = "oliver2@gmail.com";
 
-    // DNI de cliente EXISTENTE en tu tabla real (Valeria - ID 18)
+
     private static final String DNI_EXISTENTE_VALERIA = "75489906";
-    private static final String CORREO_NUEVO_VALERIA = "valeria.oficial@gmail.com";
+    private static final String CORREO_NUEVO_VALERIA = "valeria.oficial2@gmail.com";
 
     @BeforeAll
     static void setUp() {
@@ -39,7 +39,7 @@ public class ClienteDAOTest {
         boolean insertado = clienteDAO.insertar(nuevo);
         assertTrue(insertado, "El cliente con DNI " + DNI_NUEVO_UNICO + " debe insertarse correctamente");
 
-        // Verificamos que se haya guardado
+       
         Cliente recuperado = clienteDAO.buscarPorRUC(DNI_NUEVO_UNICO);
         assertNotNull(recuperado, "El cliente recién insertado debe existir en la BD");
     }
@@ -48,16 +48,16 @@ public class ClienteDAOTest {
     @Order(2)
     @DisplayName("2. Buscar cliente existente (Valeria) y modificar su correo")
     void test2_BuscarYModificarCorreoExistente() {
-        // Buscar cliente existente de la tabla real
+   
         Cliente valeria = clienteDAO.buscarPorRUC(DNI_EXISTENTE_VALERIA);
         assertNotNull(valeria, "Valeria debe ser localizada en la BD");
 
-        // Modificar solo el correo
+      
         valeria.setCorreo(CORREO_NUEVO_VALERIA);
         boolean actualizado = clienteDAO.actualizar(valeria);
         assertTrue(actualizado, "El correo de Valeria debe actualizarse con éxito");
 
-        // Comprobar cambio
+      
         Cliente valeriaActualizada = clienteDAO.buscarPorRUC(DNI_EXISTENTE_VALERIA);
         assertEquals(CORREO_NUEVO_VALERIA, valeriaActualizada.getCorreo());
     }
@@ -72,7 +72,7 @@ public class ClienteDAOTest {
         boolean eliminado = clienteDAO.eliminar(gonzalo.getIdcliente());
         assertTrue(eliminado, "El cliente insertado debe desactivarse (activo = 0)");
 
-        // Verificar que ya no figure como activo
+     
         Cliente gonzaloDesactivado = clienteDAO.buscarPorRUC(DNI_NUEVO_UNICO);
         assertNull(gonzaloDesactivado, "El cliente desactivado ya no debe retornar en la búsqueda");
     }
